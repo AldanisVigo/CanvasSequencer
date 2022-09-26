@@ -1,0 +1,62 @@
+body{
+    padding: 200px;
+    margin: 0;
+    position: relative;
+}
+
+.title{
+    float: right;
+}
+
+.sequencer{
+    background: black;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#sequencer_window{
+    width: 100%;
+    height: fit-content;
+    overflow-y: scroll;
+    background: whitesmoke;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: 80px auto;
+}
+
+#channels_canvas{
+    padding: 0;
+    margin: 0;
+    position: relative;
+    left: -1px;
+    top: -1px;
+    background: white;
+    width: 80px;
+    display: inline-block;
+    border: 1px solid white;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-crisp-edges;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+
+}
+
+#sequencer_canvas_container{
+    overflow-x: scroll;
+}
+
+#sequencer_canvas {
+    display: inline-block;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    /* background: black; */
+}
+
+
+@media only screen and (max-width: 1086px){
+    body {
+        padding: 0;
+    }
+}
+

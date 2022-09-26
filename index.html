@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="dialog.css"></link>
+        <link rel="stylesheet" href="index.css"></link>
+        <script src="dialog.js" href="dialog.js"></script>
+        <script src="index.js" defer></script>
+    </head>
+    <body>
+        <div class="sequencer">
+            <label for="bar_count" value="16" id="bar_count_label">
+                bars:
+            </label>
+            <input type="number" min="1" max="300" id="bar_count" placeholder="bars"/>
+            <label for="track_count" id="track_count_label">
+                tracks:
+            </label>
+            <input type="number" min="1" max="64" id="track_count" placeholder="tracks"/>
+            <input type="range" min="1" max="240" value="120" id="bpm_control"/>
+             <label for="bpm" id="bpm_label">
+                bpm: 120
+            </label>
+            <div class="title">OneBullet v0.0</div>
+            <br>
+            <hr>
+            <div id="sequencer_window">
+                <canvas id="channels_canvas" width="40px"></canvas>
+                <div id="sequencer_canvas_container">
+                    <canvas id="sequencer_canvas" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="dialog_screen">
+                <div class="dialog">
+                    <div class="dialog_header">
+                        <div class="dialog_close_btn">X</div>
+                    </div>
+                </div>
+        </div>
+        <!-- <Button id="retreat_step">Retreat one Step</Button><button id="advance_step">Advance one Step</button> -->
+    </body>
+</html>
