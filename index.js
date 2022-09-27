@@ -102,8 +102,16 @@ sequencer_channels_canvas.onclick = e => {
     let chan = Number(Math.floor(ny / stepTemplate.height))
     console.log(`You clicked channel ${chan}`)
     selectedChannel = chan
-    // stepDialogVisible = true
 
+    let exampleButton = document.createElement('button')
+    exampleButton.innerText = 'Example Button'
+    exampleButton.onclick = e => {
+        alert("You clicked on channel " + Number(chan+1))
+    }
+
+    let dialog = new Dialog(`Channel ${chan + 1} Chain`,null,exampleButton,null,true,null)
+    dialog.open()
+    // stepDialogVisible = true
 }
 
 
@@ -148,10 +156,6 @@ const drawSequencerSteps = () => {
                 }
             }
         }
-    }
-    if(stepDialogVisible){
-        // // paused = true
-        // drawStepDialog()
     }
 }
 
@@ -199,7 +203,133 @@ sequencer_canvas.onclick = (e) => {
     let chan = Number(Math.floor(ny / stepTemplate.height))
     if(!stepDialogVisible){
         toggleStep(chan,step)
-    }else{
-        handleStepDialogDrag()
+    }
+}
+
+class Dialog{
+    constructor(title,msg,content,icon,visible,elem){
+        this.title = title || ''
+        this.msg = msg || ''
+        this.content = content
+        this.icons = {
+            warning : 'images/warning.svg',
+            error : 'images/error.svg',
+            success : 'images/success.svg',
+            info : 'images/info.svg'
+        }
+
+        this.icon = icon || this.icons.info
+        this.visible = visible
+        this.dialog = this.generateDialog()
+        if(elem){
+            this.elem
+            this.elem = elem 
+        }else{
+            let globalScreen = document.createElement('div')
+            globalScreen.classList.add('global_dialog_screen')
+            this.elem = globalScreen
+            globalScreen.style.position = 'absolute'
+            globalScreen.style.width = '100vw'
+            globalScreen.style.height = '100vw'
+            globalScreen.style.visibility = visible
+            globalScreen.style.zIndex = visible ? 1 : -1
+            globalScreen.style.background = visible ? 'rgba(0,0,0,0.5)' : 'transparent'
+            globalScreen.style.display = 'flex'
+            globalScreen.style.alignContent = 'center'
+            globalScreen.style.alignItems = 'center'
+            globalScreen.appendChild(this.dialog)
+            document.body.appendChild(globalScreen)
+        }
+    }
+
+    generateDialog(){
+        let dialog = document.createElement('div')
+        dialog.classList.add('dialog')
+
+        //Create the header bar
+        let dialogHeader = document.createElement('div')
+        dialogHeader.classList.add('dialog_header')
+
+        //Create dialog title element
+        let dialogTitle = document.createElement('div')
+        
+        //Add the title to the dialogTitle's inner text
+        dialogTitle.innerText = this.title
+
+        //Add some margin right to the title element so it
+        //does not clash with the close button next to it
+        dialogTitle.style.marginRight = '10px'
+
+        //Create the close button
+        let dialogCloseBtn = document.createElement('div')
+        dialogCloseBtn.innerText = 'X'
+        dialogCloseBtn.classList.add('dialog_close_btn')
+
+        //Create the dialog content container
+        let dialogContent = document.createElement('div')
+        dialogContent.classList.add('dialog_content')
+
+        //Add the dialogHeader to the dialog
+        dialog.appendChild(dialogHeader)
+
+        //Add the dialogContent to the dialog
+        dialog.appendChild(dialogContent)
+        
+        //Add the dialog title to the dialog header
+        dialogHeader.appendChild(dialogTitle)
+
+        //Add the dialogCloseBtn to the dialogHeader
+        dialogHeader.appendChild(dialogCloseBtn)
+        
+        //Listen for click events on the dialogCloseBtn
+        dialogCloseBtn.onclick = () => this.close()
+
+
+        if(this.icon && this.msg){ //If there's a message
+
+            //Create the dialog icon element
+            let dialogIcon = document.createElement('img')
+            dialogIcon.classList.add('dialog_icon')
+            dialogIcon.width = 40
+            dialogIcon.height = 40
+            dialogIcon.src = this.icons[this.icon]
+
+            //Create the dialog text element
+            let dialogText = document.createElement('div')
+            dialogText.classList.add('dialog_text')
+            dialogText.innerText = this.msg
+
+            //Add the dialogIcon to the dialogContent
+            dialogContent.appendChild(dialogIcon)
+
+            //Add the dialog text to the dialogContent
+            dialogContent.appendChild(dialogText)
+
+        } //Otherwise there's content instead
+        else {
+            //Add the content to the dialog content
+            dialogContent.appendChild(this.content)
+        }
+
+        return dialog
+    }
+
+    close(){
+        console.log("Closing dialog")
+        this.visible = false
+        this.dialog.style.visibility = 'hidden'
+        this.elem.style.display = 'none'
+    }
+
+    open(){
+        this.visible = true
+        this.dialog.style.visibility = 'visible'
+        this.elem.style.display = 'block'
+    }
+
+    toggle(){
+        this.visible = !this.visible
+        this.dialog.style.visibility = this.visible ? 'visible' : 'hidden'
+        this.elem.style.display = this.visible ? 'block' : 'none'
     }
 }

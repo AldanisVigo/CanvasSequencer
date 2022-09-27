@@ -46,6 +46,10 @@ body{
     overflow-x: scroll;
 }
 
+#sequencer_canvas_container:hover{
+     cursor: url(images/edit_icon.ico), default;
+}
+
 #sequencer_canvas {
     display: inline-block;
     overflow-x: scroll;
@@ -53,6 +57,9 @@ body{
     /* background: black; */
 }
 
+#sequence_canvas:hover{
+    cursor: url(images/pencil.ico), default;
+}
 
 @media only screen and (max-width: 1086px){
     body {

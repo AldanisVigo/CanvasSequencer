@@ -1,9 +1,62 @@
-.dialog_screen{
+.dialog{
+    width: fit-content;
+    align-self: center;
+    margin: auto;
+    max-width: 200px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    box-shadow: 1px 1px 10px white;
+    margin-top: 3em;
+}
+
+.dialog_header{
+    background: lightblue;
+    display: grid;
+    grid-template-columns: auto 20px;
+    padding: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.dialog_content{
+    background: white;
+    padding: 20px;
+    word-wrap: break-word;
+    /* display: flex; */
+}
+
+.dialog_text{
+    position: relative;
+    top: 10px;
+}
+
+.dialog_close_btn{
+    color: black;
+    font-weight: bold;
+}
+
+.dialog_icon{
+    /* display: inline-block; */
+    float: left;
+    margin-right: 10px;
+}
+
+.dialog_close_btn:hover{
+    color : red;
+    cursor: pointer;
+}
+
+.global_dialog_screen{
     position: absolute;
     left: 0px;
     top: 0px;
     width: 100vw;
     height: 100vh;
     background: rgba(0,0,0,0.5);
-
+    visibility : 'hidden';
+    display: flex;
+    align-content: center;
+    align-items: center;
 }

@@ -2,7 +2,7 @@ class Dialog{
     constructor(title,msg,icon,visible,elem){
         this.title = title || ''
         this.msg = msg || ''
-        
+
         let icons = {
             warning : 'images/warning.svg',
             error : 'images/error.svg',
@@ -93,14 +93,17 @@ class Dialog{
 
     close(){
         this.visible = false
+        this.dialog.style.visibility = 'hidden'
     }
 
     open(){
         this.visible = true
+        this.dialog.style.visibility = 'visible'
     }
 
     toggle(){
         this.visible = !this.visible
+        this.dialog.style.visibility = this.visible ? 'visible' : 'hidden'
     }
 }
 
